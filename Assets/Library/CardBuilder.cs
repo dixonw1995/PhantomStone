@@ -1,5 +1,5 @@
 ﻿using System;
-using LitJson;
+using Newtonsoft.Json;
 
 namespace AssemblyCSharp
 {
@@ -8,8 +8,8 @@ namespace AssemblyCSharp
 		public static Card Build(string id) {
 			if (id.Length == 0)
 				return null;
-			string cardAsString = SimpleFileSystem.Read (SimpleFileSystem.persistentDataPath, id + ".json");
-			Card card = JsonMapper.ToObject<Card> (cardAsString);
+			string cardAsString = SimpleFileSystem.Read (SimpleFileSystem.persistentDataPath, id, ".json");
+			Card card = JsonConvert.DeserializeObject<Card> (cardAsString);
 			return card;
 		}
 	}

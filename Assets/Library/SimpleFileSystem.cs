@@ -10,9 +10,9 @@ namespace AssemblyCSharp
 
 		public static readonly string persistentDataPath = Application.persistentDataPath + "/";
 
-		public static string Read (string directory, string path)
+		public static string Read (string directory, string path, string extension = "")
 		{
-			string filePath = directory + path;
+			string filePath = directory + path + extension;
 
 			if (File.Exists (filePath)) {
 				return File.ReadAllText (filePath);
@@ -21,9 +21,9 @@ namespace AssemblyCSharp
 			}
 		}
 
-		public static void Write (string directory, string path, string data)
+		public static void Write (string directory, string path, string data, string extension = "")
 		{
-			string filePath = directory + path;
+			string filePath = directory + path + extension;
 			File.WriteAllText (filePath, data);
 		}
 	}

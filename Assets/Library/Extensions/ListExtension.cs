@@ -21,7 +21,7 @@ namespace AssemblyCSharp
 			int i;
 			T temp;
 			for ( int pos = 0; pos < count; pos++) {
-				i = Utility.random.Next (count);
+				i = StaticRandom.random.Next (count);
 				temp = list [i];
 				list [i] = list [pos];
 				list [pos] = temp;
