@@ -7,6 +7,7 @@ namespace AssemblyCSharp
 
 		/// <summary>
 		/// Convert enum item to bool by comparing with benchmark.
+		/// , true if int value of item <= benchmark, false otherwise.
 		/// </summary>
 		/// <returns><c>true</c>, if int value of item <= benchmark, <c>false</c> otherwise.</returns>
 		/// <param name="value">Value.</param>
@@ -17,10 +18,11 @@ namespace AssemblyCSharp
 
 		/// <summary>
 		/// Convert enum item to bool by comparing with benchmark.
-		/// </summary>
+		/// , true if int value of item <= benchmark, false otherwise.
 		/// <returns><c>true</c>, if int value of item <= benchmark, <c>false</c> otherwise.</returns>
 		/// <param name="value">Value.</param>
 		/// <param name="benchmark">Benchmark.</param>
+		/// </summary>
 		public static bool ToBool (this Enum value, Enum benchmark) {
 			return Convert.ToInt32 (value) < Convert.ToInt32 (benchmark);
 		}

@@ -14,9 +14,8 @@ namespace AssemblyCSharp
 	}
 
 	[Serializable]
-	public class Area : IList<Card>
+	public class Area
 	{
-		private Coordinate coordinate;
 		private Fertility fertility = Fertility.Low;
 		private List<Card> cards = new List<Card> ();
 
@@ -25,11 +24,8 @@ namespace AssemblyCSharp
 
 		public Area (Coordinate coordinate, Fertility fertility)
 		{
-			this.coordinate = coordinate;
 			this.fertility = fertility;
 		}
-
-		#region IList implementation
 
 		public int IndexOf (Card item)
 		{
@@ -55,10 +51,6 @@ namespace AssemblyCSharp
 			}
 		}
 
-		#endregion
-
-		#region ICollection implementation
-
 		public void Add (Card item)
 		{
 			cards.Add (item);
@@ -74,11 +66,6 @@ namespace AssemblyCSharp
 			return cards.Contains (item);
 		}
 
-		public void CopyTo (Card[] array, int arrayIndex)
-		{
-			cards.CopyTo (array, arrayIndex);
-		}
-
 		public bool Remove (Card item)
 		{
 			return cards.Remove (item);
@@ -89,32 +76,6 @@ namespace AssemblyCSharp
 				return cards.Count;
 			}
 		}
-
-		public bool IsReadOnly {
-			get {
-				return ((IList)cards).IsReadOnly;
-			}
-		}
-
-		#endregion
-
-		#region IEnumerable implementation
-
-		public IEnumerator<Card> GetEnumerator ()
-		{
-			return cards.GetEnumerator ();
-		}
-
-		#endregion
-
-		#region IEnumerable implementation
-
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-		{
-			return GetEnumerator ();
-		}
-
-		#endregion
 	}
 }
 

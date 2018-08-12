@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AssemblyCSharp
 {
@@ -66,50 +67,5 @@ namespace AssemblyCSharp
 		
 	}
 
-	public class CardMetadata {
-		private readonly Card card;
-		private readonly Player owner;
-		private Player controller;
-		private Face face;
-
-		public CardMetadata (Card card, Player owner)
-		{
-			this.card = card;
-			this.owner = owner;
-
-			this.controller = this.owner;
-			this.face = Face.Down;
-		}
-
-		public Card Card {
-			get {
-				return this.card;
-			}
-		}
-
-		public Player Owner {
-			get {
-				return this.owner;
-			}
-		}
-
-		public Player Controller {
-			get {
-				return this.controller;
-			}
-			set {
-				controller = value;
-			}
-		}
-
-		public Face Face {
-			get {
-				return this.face;
-			}
-			set {
-				face = value;
-			}
-		}
-	}
 }
 
