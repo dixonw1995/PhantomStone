@@ -22,9 +22,19 @@ namespace AssemblyCSharp
 		public Area () {
 		}
 
-		public Area (Coordinate coordinate, Fertility fertility)
+		public Area (Fertility fertility)
 		{
 			this.fertility = fertility;
+		}
+
+		public Area (int fertility)
+		{
+			if (Enum.IsDefined (typeof(Fertility), fertility))
+				this.fertility = (Fertility)fertility;
+			else if (fertility < 0)
+				this.fertility = Fertility.Hollow;
+			else
+				throw new ArgumentOutOfRangeException ("No such fertility level(-1..3).");
 		}
 
 		public int IndexOf (Card item)
@@ -76,6 +86,12 @@ namespace AssemblyCSharp
 				return cards.Count;
 			}
 		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[Area: fertility={0}, cards={{{1}}}]", fertility, cards.PrintOut ("{1}({2}), "));
+		}
+
 	}
 }
 

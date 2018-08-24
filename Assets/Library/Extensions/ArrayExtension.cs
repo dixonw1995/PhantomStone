@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
@@ -21,13 +22,7 @@ namespace AssemblyCSharp
 				}
 			}
 		}
-
-		public static string PrintOut<T> (this T[] array)
-		{
-			string result = "";
-			Array.ForEach (array, item => result += string.Format ("{0}({1})\n", item.ToString (), item.GetHashCode ()));
-			return result;
-		}
 	}
+
 }
 

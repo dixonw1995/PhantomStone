@@ -17,6 +17,11 @@ namespace AssemblyCSharp
 			this.controller = this.owner;
 		}
 
+		public CardState (Player owner, object position) : this(owner)
+		{
+			this.position = position;
+		}
+
 		public Player Owner {
 			get {
 				return this.owner;
@@ -40,5 +45,20 @@ namespace AssemblyCSharp
 				face = value;
 			}
 		}
+
+		public object Position {
+			get {
+				return this.position;
+			}
+			set {
+				position = value;
+			}
+		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[CardState: owner={0}, controller={1}, face={2}, position={3}]", owner, controller, face, position);
+		}
+		
 	}
 }

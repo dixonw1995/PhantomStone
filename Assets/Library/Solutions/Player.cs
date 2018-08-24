@@ -23,6 +23,12 @@ namespace AssemblyCSharp
 				return this.team;
 			}
 		}
+
+		public override string ToString ()
+		{
+			return string.Format (base.ToString() + "[Player: team={0}]", team);
+		}
+		
 	}
 }
 

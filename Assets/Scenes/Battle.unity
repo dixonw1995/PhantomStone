@@ -849,6 +849,91 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!1 &451564126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 451564128}
+  - component: {fileID: 451564127}
+  - component: {fileID: 451564129}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &451564127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451564126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c2229503f6d0149bd51c8bf38e842d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &451564128
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451564126}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &451564129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 451564126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c283c1fb7adf434aa713409b3c14eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: demo
+  players:
+  - '[User: id=000, name=John Doe][Player: team=A]'
+  - '[User: id=001, name=Jane Roe][Player: team=B]'
+  turns: 0
+  timing: 0
+  region:
+  - '[(0,0)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(0,1)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(0,2)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(0,3)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(0,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(1,0)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(1,1)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(1,2)->[Area: fertility=Medium, cards={0 item}]]'
+  - '[(1,3)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(1,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(2,0)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(2,1)->[Area: fertility=Medium, cards={0 item}]]'
+  - '[(2,2)->[Area: fertility=High, cards={0 item}]]'
+  - '[(2,3)->[Area: fertility=Medium, cards={0 item}]]'
+  - '[(2,4)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(3,0)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(3,1)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(3,2)->[Area: fertility=Medium, cards={0 item}]]'
+  - '[(3,3)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  cardStates: []
 --- !u!1 &595039594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,6 +2432,48 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1426779118}
+--- !u!1 &1467566663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1467566664}
+  - component: {fileID: 1467566665}
+  m_Layer: 0
+  m_Name: User
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1467566664
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1467566663}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1467566665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1467566663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9a147437742f46b68740dc2217717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 000
+  name: John Doe
 --- !u!1 &1522410852
 GameObject:
   m_ObjectHideFlags: 0

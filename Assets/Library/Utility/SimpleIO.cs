@@ -5,14 +5,12 @@ using System.IO;
 namespace AssemblyCSharp
 {
 	[Serializable]
-	public class SimpleFileSystem
+	public class SimpleIO
 	{
-
-		public static readonly string persistentDataPath = Application.persistentDataPath + "/";
 
 		public static string Read (string directory, string path, string extension = "")
 		{
-			string filePath = directory + path + extension;
+			string filePath = Path.Combine (directory, path) + extension;
 
 			if (File.Exists (filePath)) {
 				return File.ReadAllText (filePath);
@@ -23,7 +21,7 @@ namespace AssemblyCSharp
 
 		public static void Write (string directory, string path, string data, string extension = "")
 		{
-			string filePath = directory + path + extension;
+			string filePath = Path.Combine (directory, path) + extension;
 			File.WriteAllText (filePath, data);
 		}
 	}
