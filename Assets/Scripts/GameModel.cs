@@ -10,8 +10,10 @@ using System.Collections.Generic;
 /// Other script can only subscribe it to fetch game data.
 /// 
 /// </summary>
-public class GameModelScript : MonoBehaviour, INotifyPropertyChanged
+public class GameModel : MonoBehaviour, INotifyPropertyChanged
 {
+	// Static instance of GameModel which allows it to be accessed by any other script.
+	public static GameModel instance = null;
 
 	Game game;
 
@@ -21,6 +23,19 @@ public class GameModelScript : MonoBehaviour, INotifyPropertyChanged
 	[ReadOnly] public Timing timing;
 	[ReadOnly] public string[] region;
 	[ReadOnly] public string[] cardStates;
+
+	//Awake is always called before any Start functions
+	void Awake()
+	{
+		// Check if instance already exists
+		if (instance == null)
+			// if not, set instance to this.
+			instance = this;
+		// If instance already exists and it's not this:
+		else if (instance != this)
+			// Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameModel.
+			Destroy(gameObject);
+	}
 
 	[ContextMenu("Initialize")]
 	void Initialize ()
