@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23416992914676512}
   - component: {fileID: 65947445562902256}
   - component: {fileID: 54249086180541580}
-  - component: {fileID: 114774782788782102}
+  - component: {fileID: 114036430520505372}
   m_Layer: 0
   m_Name: Area
   m_TagString: Grid
@@ -117,7 +117,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: dbf443e74e8c1df46b1c0866b3656eb3, type: 2}
+  - {fileID: 2100000, guid: b3856720a495187438b9a3fd0805aba2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,7 +223,7 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &114774782788782102
+--- !u!114 &114036430520505372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -231,14 +231,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423873942274738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e88fa15ad1584424793c6c33d83db844, type: 3}
+  m_Script: {fileID: 11500000, guid: aaecc89837d65b048a43807a898f736d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area:
-    coordinate:
-      x: 0
-      y: 0
-    fertility: 1
-    cards: []
-  text: {fileID: 102310225071709888}
+  renderer: {fileID: 23416992914676512}
+  fertility: {fileID: 102310225071709888}
   cards: {fileID: 4349072391936592}

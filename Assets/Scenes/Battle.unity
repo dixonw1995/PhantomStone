@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 53922042}
-  - component: {fileID: 53922044}
+  - component: {fileID: 53922043}
   m_Layer: 0
   m_Name: Region
   m_TagString: Untagged
@@ -142,7 +142,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &53922044
+--- !u!114 &53922043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -150,12 +150,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 53922041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a648a4678bf9f304b8a706062523361c, type: 3}
+  m_Script: {fileID: 11500000, guid: c79f46de4e846bf43972283ed607eb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaPrefab: {fileID: 1423873942274738, guid: 84e30a71264435943ab9cb11b74db0b1, type: 2}
-  padding: 0.1
-  areas: []
+  areaPref: {fileID: 114036430520505372, guid: dddca17932681d84c8b6a1eb4b589c4b, type: 2}
+  margin: 0.1
+  gameModel: {fileID: 451564129}
 --- !u!1 &85708816
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c2229503f6d0149bd51c8bf38e842d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turns: 0
+  timing: 0
+  gameModel: {fileID: 451564129}
 --- !u!4 &451564128
 Transform:
   m_ObjectHideFlags: 0
@@ -888,7 +891,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &451564129
 MonoBehaviour:
@@ -898,7 +901,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 451564126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c283c1fb7adf434aa713409b3c14eba, type: 3}
+  m_Script: {fileID: 11500000, guid: af41eef9e38396e4abc64c7ae6aa4afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: demo
@@ -907,6 +910,7 @@ MonoBehaviour:
   - '[User: id=001, name=Jane Roe][Player: team=B]'
   turns: 0
   timing: 0
+  regionType: saddle
   region:
   - '[(0,0)->[Area: fertility=Empty, cards={0 item}]]'
   - '[(0,1)->[Area: fertility=Empty, cards={0 item}]]'
@@ -928,12 +932,13 @@ MonoBehaviour:
   - '[(3,2)->[Area: fertility=Medium, cards={0 item}]]'
   - '[(3,3)->[Area: fertility=Low, cards={0 item}]]'
   - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
-  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
-  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
-  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
-  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
-  - '[(3,4)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(4,0)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(4,1)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(4,2)->[Area: fertility=Low, cards={0 item}]]'
+  - '[(4,3)->[Area: fertility=Empty, cards={0 item}]]'
+  - '[(4,4)->[Area: fertility=Empty, cards={0 item}]]'
   cardStates: []
+  userModel: {fileID: 1467566665}
 --- !u!1 &595039594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,10 +1174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35a59ec259aaf4b87479218ec3ea99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect: {fileID: 621438174}
-  directions: 2
-  hMargin: 1
-  vMargin: 0
 --- !u!114 &621438179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,13 +1384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9106bc2f798679d40ac03d4ced130e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  command: {fileID: 850089848}
-  debug: {fileID: 1154036423}
-  result: {fileID: 1566466682}
-  region: {fileID: 53922044}
-  worldCamera: {fileID: 1522410859}
-  cardTemplate: {fileID: 1867181570163606, guid: c94e9a7b58a32e64480a7ff00d4d2dd4,
-    type: 2}
 --- !u!222 &661041879
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1745,10 +1739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35a59ec259aaf4b87479218ec3ea99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect: {fileID: 850223731}
-  directions: 2
-  hMargin: 1
-  vMargin: 0
 --- !u!114 &850223736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2235,7 +2225,7 @@ Transform:
   - {fileID: 1522410857}
   - {fileID: 53922042}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1362896473
 GameObject:
@@ -2459,7 +2449,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1467566665
 MonoBehaviour:
@@ -2469,11 +2459,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1467566663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e9a147437742f46b68740dc2217717, type: 3}
+  m_Script: {fileID: 11500000, guid: a39159c4c184c6c40800d0a787cbe8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 000
   name: John Doe
+  gameModel: {fileID: 451564129}
 --- !u!1 &1522410852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,8 +2581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bff52b013922e48a37236871282ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1522410856}
-  target: {fileID: 53922042}
 --- !u!1 &1566466679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,7 +2697,7 @@ RectTransform:
   - {fileID: 738906174}
   - {fileID: 96101744}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2778,7 +2767,7 @@ Transform:
   - {fileID: 168871470}
   - {fileID: 227624312}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1843912465
 GameObject:
@@ -2858,7 +2847,7 @@ GameObject:
   - component: {fileID: 1881838190}
   - component: {fileID: 1881838189}
   m_Layer: 5
-  m_Name: Opponent
+  m_Name: Rival
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

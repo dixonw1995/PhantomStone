@@ -19,6 +19,12 @@ namespace AssemblyCSharp
 		private Fertility fertility = Fertility.Low;
 		private List<Card> cards = new List<Card> ();
 
+		public Fertility Fertility {
+			get {
+				return this.fertility;
+			}
+		}
+
 		public Area () {
 		}
 

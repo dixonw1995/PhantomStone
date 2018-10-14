@@ -2,7 +2,7 @@
 
 namespace AssemblyCSharp
 {
-	[Serializable]
+	
 	public class User
 	{
 		protected readonly string id;

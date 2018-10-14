@@ -5,36 +5,95 @@ using System.ComponentModel;
 using System;
 using System.Collections.Generic;
 
+public delegate void AreaCallback (Coordinate coord, Fertility fertility);
+
+public interface IGameModel {
+	void ForeachArea (AreaCallback callback);
+}
+
 /// <summary>
-/// Model publisher is the only script which store game data.
-/// Other script can only subscribe it to fetch game data.
+/// GameModel publishes game data.
+/// Other script can subscribe it and fetch game data.
 /// 
 /// </summary>
-public class GameModel : MonoBehaviour, INotifyPropertyChanged
+public class GameModel : MonoBehaviour, INotifyPropertyChanged, IGameModel
 {
-	// Static instance of GameModel which allows it to be accessed by any other script.
-	public static GameModel instance = null;
-
 	Game game;
 
-	[ReadOnly] public string id;
-	[ReadOnly] public string[] players;
-	[ReadOnly] public int turns;
-	[ReadOnly] public Timing timing;
-	[ReadOnly] public string[] region;
-	[ReadOnly] public string[] cardStates;
+	[ReadOnly][SerializeField] string id;
+	[ReadOnly][SerializeField] string[] players;
+	[ReadOnly][SerializeField] int turns;
+	[ReadOnly][SerializeField] Timing timing;
+	[SerializeField] string regionType = "standard";
+	[ReadOnly][SerializeField] string[] region;
+	[ReadOnly][SerializeField] string[] cardStates;
 
-	//Awake is always called before any Start functions
-	void Awake()
-	{
-		// Check if instance already exists
-		if (instance == null)
-			// if not, set instance to this.
-			instance = this;
-		// If instance already exists and it's not this:
-		else if (instance != this)
-			// Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameModel.
-			Destroy(gameObject);
+	[SerializeField] UserModel userModel;
+	Player player;
+
+	public string Id {
+		get {
+			this.id = game.Id;
+			return this.id;
+		}
+	}
+
+	public string[] Players {
+		get {
+			this.players = game.Players.ToStrings ();
+			return this.players;
+		}
+	}
+
+	public int Turns {
+		get {
+			this.turns = game.Turns;
+			return this.turns;
+		}
+	}
+
+	public Timing Timing {
+		get {
+			this.timing = game.Timing;
+			return this.timing;
+		}
+	}
+
+	public string[] Region {
+		get {
+			this.region = game.Region.ToStrings ();
+			return this.region;
+		}
+	}
+
+	public string[] CardStates {
+		get {
+			this.cardStates = game.CardStates.ToStrings ();
+			return this.cardStates;
+		}
+	}
+
+	public Player Player {
+		get {
+			if (player == null && game != null && game.Players != null && userModel != null) {
+				player = game.FindPlayer (userModel.Id);
+			}
+			return this.player;
+		}
+	}
+
+	protected void Awake() {
+		Initialize ();
+	}
+
+	void UserUpdate (object sender, PropertyChangedEventArgs propertyName) {
+		switch (propertyName.PropertyName) {
+		case "User":
+		case "Name":
+			Player.Name = userModel.Name;
+			OnPropertyChanged ("Players");
+			break;
+		}
 	}
 
 	[ContextMenu("Initialize")]
@@ -42,9 +101,10 @@ public class GameModel : MonoBehaviour, INotifyPropertyChanged
 	{
 		Player player0 = new Player ("000", "John Doe", "A", new List<Card> ());
 		Player player1 = new Player ("001", "Jane Roe", "B", new List<Card> ());
-		game = new Game ("demo", new Player[]{ player0, player1 }, "standard");
-		Revert ();
+		game = new Game ("demo", new Player[]{ player0, player1 }, regionType);
 		PropertyChanged += Revert;
+		OnPropertyChanged ("Game");
+		userModel.PropertyChanged += UserUpdate;
 	}
 
 	[ContextMenu("Revert")]
@@ -61,6 +121,12 @@ public class GameModel : MonoBehaviour, INotifyPropertyChanged
 	void Revert (object sender, PropertyChangedEventArgs propertyName)
 	{
 		switch (propertyName.PropertyName) {
+		case "Game":
+			Revert ();
+			break;
+		case "Id":
+			id = game.Id;
+			break;
 		case "Players":
 			players = game.Players.ToStrings ();
 			break;
@@ -104,6 +170,17 @@ public class GameModel : MonoBehaviour, INotifyPropertyChanged
 		PropertyChangedEventHandler handler = propertyChanged;
 		if (handler != null)
 			handler (this, new PropertyChangedEventArgs (propertyName));
+	}
+
+	#endregion
+
+	#region IGameModel implementation
+
+	public void ForeachArea (AreaCallback callback)
+	{
+		foreach (KeyValuePair<Coordinate, Area> pair in game.Region) {
+			callback (pair.Key, pair.Value.Fertility);
+		}
 	}
 
 	#endregion

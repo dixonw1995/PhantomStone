@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace AssemblyCSharp
 {
-	[Serializable]
+	
 	public class Card
 	{
 		private string id;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
-	[Serializable]
+	
 	public class Player : User
 	{
 		private readonly string team;

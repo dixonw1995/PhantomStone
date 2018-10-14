@@ -2,40 +2,56 @@
 using System.Collections;
 using AssemblyCSharp;
 using UnityEditor;
+using System.ComponentModel;
+using System;
 
-public class UserModel : MonoBehaviour
+/// <summary>
+/// UserModel publishes user data.
+/// Other script can subscribe it and fetch user data.
+/// 
+/// </summary>
+public class UserModel : MonoBehaviour, INotifyPropertyChanged
 {
-	// Static instance of GameModel which allows it to be accessed by any other script.
-	public static UserModel instance = null;
-
 	User user = new User ("000", "John Doe");
-	[ReadOnly] public string id;
-	public new string name;
 
-	//Awake is always called before any Start functions
-	void Awake()
-	{
-		// Check if instance already exists
-		if (instance == null)
-			// if not, set instance to this.
-			instance = this;
-		// If instance already exists and it's not this:
-		else if (instance != this)
-			// Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a UserModel.
-			Destroy(gameObject);
+	[ReadOnly][SerializeField] string id;
+	[SerializeField] new string name;
+	[SerializeField] GameModel gameModel;
+
+	public string Id {
+		get {
+			this.id = user.Id;
+			return this.id;
+		}
+	}
+
+	public string Name {
+		get {
+			this.name = user.Name;
+			return this.name;
+		}
+		set {
+			name = value;
+		}
+	}
+
+	protected void Awake() {
+		Initialize ();
 	}
 
 	[ContextMenu("Initialize")]
 	void Initialize ()
 	{
 		user = new User ("000", "John Doe");
-		Revert ();
+		PropertyChanged += Revert;
+		OnPropertyChanged ("User");
 	}
 
 	[ContextMenu("Apply")]
 	void Apply ()
 	{
 		user.Name = name;
+		OnPropertyChanged ("Name");
 		GUI.FocusControl (null);
 	}
 
@@ -48,4 +64,48 @@ public class UserModel : MonoBehaviour
 		}
 		GUI.FocusControl (null);
 	}
+
+	void Revert (object sender, PropertyChangedEventArgs propertyName)
+	{
+		switch (propertyName.PropertyName) {
+		case "User":
+			Revert ();
+			break;
+		case "Id":
+			id = user.Id;
+			break;
+		case "Name":
+			name = user.Name;
+			break;
+		}
+	}
+
+	#region INotifyPropertyChanged implementation
+
+	private event PropertyChangedEventHandler propertyChanged;
+
+	private object eventLock = new object ();
+
+	public event PropertyChangedEventHandler PropertyChanged {
+		add {
+			lock (eventLock) {
+				propertyChanged -= value;
+				propertyChanged += value;
+			}
+		}
+		remove {
+			lock (eventLock) {
+				propertyChanged -= value;
+			}
+		}
+	}
+
+	protected virtual void OnPropertyChanged(string propertyName)
+	{
+		PropertyChangedEventHandler handler = propertyChanged;
+		if (handler != null)
+			handler (this, new PropertyChangedEventArgs (propertyName));
+	}
+
+	#endregion
 }

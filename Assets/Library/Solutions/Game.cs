@@ -6,13 +6,14 @@ using System.IO;
 
 namespace AssemblyCSharp
 {
-	[Serializable]
+	
 	public class Game
 	{
 		private readonly string id;
 		private readonly Player[] players;
 		private int turns = 0;
 		private Timing timing = Timing.Start;
+		private readonly string regionType;
 		private readonly List2D<Area> region;
 		private readonly IDictionary<Card, CardState> cardStates = new SerializableDictionary<Card, CardState> ();
 
@@ -38,6 +39,7 @@ namespace AssemblyCSharp
 			this.id = id;
 			this.players = players;
 			this.region = new List2D<Area> ();
+			this.regionType = regionType;
 			SetRegion (regionType);
 		}
 
@@ -77,6 +79,10 @@ namespace AssemblyCSharp
 			}
 		}
 
+		public Player FindPlayer(string id) {
+			return Array.Find<Player> (players, (player) => player.Id == id);
+		}
+
 		protected void SetRegion(List2D<Area> region) {
 			foreach (KeyValuePair<Coordinate, Area> kvp in region) {
 				Region [kvp.Key] = kvp.Value;
@@ -113,18 +119,23 @@ namespace AssemblyCSharp
 							interpreting = false;
 							negative = false;
 						}
+						switch (ch) {
 						// Whether it is interpreting, new-line charater imply new row.
 						// Move cursor to next row.
-						if (ch == '\n')
+						case '\n':
 							cursor = new Coordinate (cursor.x + 1, 0);
+							break;
 						// Surely not interpreting number. Default is positive.
 						// Find negative sign. But not sure if next charater is numeric.
-						if (ch == '-')
+						case '-':
 							negative = true;
-					// Surely not interpreting number.
-					// Ignore any previous sign and set to positive.
-					else
+							break;
+						// Surely not interpreting number.
+						// Ignore any previous sign and set to positive.
+						default:
 							negative = false;
+							break;
+						}
 					}
 				}
 				// End of file. If still interpreting, finish it.
